@@ -1,24 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header';
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import Feed from './components/Feed';
+import Video from './components/Video';
+import { useState } from 'react';
 
 function App() {
+  const [data, setData] =useState([])
   return (
+    <BrowserRouter>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header setData={setData}/>
+      <Routes>
+        <Route exact path="/" element={<Feed data={data}/>}/>
+        <Route exact path="/video/:id" element={<Video/>}/>
+      </Routes>
     </div>
+    </BrowserRouter>
   );
 }
 
